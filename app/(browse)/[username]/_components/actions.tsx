@@ -1,5 +1,6 @@
 "use client";
 
+import { onBlock, onUnBlock } from "@/actions/block";
 import { onFollow, onUnfollow } from "@/actions/follow";
 import { Button } from "@/components/ui/button";
 import { Action } from "@prisma/client/runtime/library";
@@ -42,15 +43,25 @@ export const Actions = ({ isFollowing,userId }: ActionsProps) => {
         }
     }
 
+    const handleBlock = () => {
+      startTransition(()=> {
+        onUnBlock(userId)
+        .then((data) => {
+          toast.success(`You have blocked ${data.blocked.username}`)
+        })
+        .catch(() => toast.error("Failed to block the user"))
+      })
+    }
 
 
   return (
-    <Button
-      disabled={isPending}
-      onClick={onClick}
-      variant="primary"
-    >
-      {isFollowing ? "Unfollow" : "Follow"}
-    </Button>
+    <>
+      <Button disabled={isPending} onClick={onClick} variant="primary">
+        {isFollowing ? "Unfollow" : "Follow"}
+      </Button>
+      <Button onClick={handleBlock} disabled={isPending} variant="destructive">
+        unblock
+      </Button>
+    </>
   );
 };
