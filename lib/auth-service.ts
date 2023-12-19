@@ -5,7 +5,7 @@ import { db } from "./db";
 export const getSelf = async () => {
     const self = await currentUser();
 
-    if (!self || self.username) {
+    if (!self || !self.username) {
         throw new Error("Unauthorized");
     }
 
