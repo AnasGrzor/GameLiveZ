@@ -39,8 +39,8 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
   };
 
   useEffect(() => {
-    onVolumeChange(0)
-  },[]);
+    onVolumeChange(0);
+  }, []);
 
   const toggleFullScreen = () => {
     if (isFullScreen) {
@@ -70,7 +70,11 @@ export const LiveVideo = ({ participant }: LiveVideoProps) => {
       <video ref={videoRef} width="100%" />
       <div className="absolute top-0 w-full h-full opacity-0 hover:opacity-100 hover:transition-all">
         <div className="absolute bottom-0 h-14 flex w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
-          <VolumeControl onChange={onVolumeChange} value={volume} onToggle={toggleMute} />
+          <VolumeControl
+            onChange={onVolumeChange}
+            value={volume}
+            onToggle={toggleMute}
+          />
           <FullScreenControl
             isFullScreen={isFullScreen}
             onToggle={toggleFullScreen}
