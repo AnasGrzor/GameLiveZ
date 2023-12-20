@@ -9,9 +9,10 @@ import {
 import { ConnectionState } from "livekit-client";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { ChatHeader } from "./chat-header";
-import { ChatForm } from "./chat-form";
-import { ChatList } from "./chat-list";
+import { ChatHeader, ChatHeaderSkeleton } from "./chat-header";
+import { ChatForm, ChatFormSkeleton } from "./chat-form";
+import { ChatList, ChatListSkeleton } from "./chat-list";
+import { ChatCommunity } from "./chat-community";
 
 interface ChatProps {
   hostName: string;
@@ -48,22 +49,22 @@ export const Chat = ({
     if (matches) {
       onExpand();
     }
-  }, [matches,onExpand]);
+  }, [matches, onExpand]);
 
   const reversedMessages = useMemo(() => {
-    return messages.sort((a,b) => b.timestamp - a.timestamp)
-  },[messages])
+    return messages.sort((a, b) => b.timestamp - a.timestamp);
+  }, [messages]);
 
   const onSubmit = () => {
-    if (!send) return
+    if (!send) return;
 
-    send(value)
-    setValue("")
-  }
+    send(value);
+    setValue("");
+  };
 
-  const onChange = (value:string) => {
-    setValue(value)
-  }
+  const onChange = (value: string) => {
+    setValue(value);
+  };
 
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
@@ -83,10 +84,22 @@ export const Chat = ({
         </>
       )}
       {variant === ChatVariant.COMMUNITY && (
-        <>
-          <p>Community Mode</p>
-        </>
+        <ChatCommunity
+          viewerName={viewerName}
+          hostName={hostName}
+          isHidden={isHidden}
+        />
       )}
     </div>
   );
 };
+
+export const ChatSkeleton = () => {
+    return (
+        <div className="flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2 ">
+            <ChatHeaderSkeleton />
+            <ChatListSkeleton />
+            <ChatFormSkeleton />
+        </div>
+    )
+}
