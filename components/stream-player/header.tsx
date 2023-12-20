@@ -44,7 +44,7 @@ export const Header = ({
         <UserAvatar
           imageUrl={imageUrl}
           username={hostName}
-          size="lg"
+          size="large"
           isLive={isLive}
           showBadge
         />
@@ -82,7 +82,7 @@ export const HeaderSkeleton = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4">
       <div className="flex items-center gap-x-2">
-        <UserAvatarSkeleton size="lg" />
+        <UserAvatarSkeleton size="large" />
         <div className="space-y-2">
           <Skeleton className="h-6 w-32" />
           <Skeleton className="h-4 w-24" />
