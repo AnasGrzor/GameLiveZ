@@ -25,6 +25,7 @@ export const Actions = ({
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { userId } = useAuth();
+  console.log("isHost", isHost)
 
   const handleFollow = () => {
     startTransition(() => {

@@ -19,12 +19,10 @@ interface VideoProps {
 export const Video = ({ hostname, hostIdentity }: VideoProps) => {
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
-  const tracks = useTracks([
-    Track.Source.Camera,
-    Track.Source.Microphone,
-  ]).filter((track) => {
-    track.participant.identity === hostIdentity
-  });
+   const tracks = useTracks([
+     Track.Source.Camera,
+     Track.Source.Microphone,
+   ]).filter((track) => track.participant.identity === hostIdentity);
 
   let content;
 
