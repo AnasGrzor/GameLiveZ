@@ -34,7 +34,7 @@ export const onBlock = async (id: string) => {
   return blockedUser;
 };
 
-export const onUnblock = async (id: string) => {
+export const onUnBlock = async (id: string) => {
   const self = await getSelf();
   const unblockedUser = await unblockUser(id);
 
