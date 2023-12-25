@@ -23,6 +23,7 @@ export const POST = async (req:Request) => {
 
     
   if (event.event === "ingress_started") {
+    console.log("ingress_started", event.ingressInfo?.ingressId);
     await db.stream.update({
       where: {
         ingressId: event.ingressInfo?.ingressId,
